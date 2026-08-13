@@ -1,19 +1,13 @@
 module seq_detector(
-	input  clk,
-  	input  rst,
-  	input  in,
-  	output out
+	input logic clk, rst, in,
+  	output logic out
 );
   
   // The sequnce we are going to detect is 1011 overlapping
   
-  parameter IDLE = 0, // 0
-  			S1   = 1, // 1
-  			S2   = 2, // 10
-  			S3   = 3, // 101
-  			S4   = 4; // 1011
+  typedef enum logic [2:0] {IDLE, S1, S2, S3, S4} state_t; 
   
-  reg [2:0] cur_state, next_state;
+  state_t cur_state, next_state;
   
   assign out = (cur_state == S4);
   
